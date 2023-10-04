@@ -1,0 +1,57 @@
+#include <stdlib.h>
+#include <iostream>
+
+struct TwoInts   //объ€вл€ем структуру TwoInts, котора€ присваивает a и b значени€ типа int
+{
+    int a;
+    int b;
+};
+
+struct StructWithArray   //объ€вл€ем структуру StructWithArray, имеющую массив arr[4](с 4 значени€ми типа int) и указатель someNumber типа int
+{
+    int arr[4];
+    int* someNumber;
+};
+
+int main()   //функци€; точка входа программы
+{
+    TwoInts i2 = { };   //объ€вл€ем переменную i2 типа TwoInts и присваиваем ей значение 0
+    i2.a = 5;   //объ€вл€ем переменную i2.a и присваиваем ей значение 5
+    i2.b = 7;   //объ€вл€ем переменную i2.b и присваиваем ей значение 7
+
+    std::cout << i2.a << std::endl;   //выводим на экран значение i2.a
+    std::cout << i2.b << std::endl;   //выводим на экран значение i2.b
+    
+    StructWithArray s = { };   //объ€вл€ем переменную s типа StructWithArray и присваиваем ей значение 0
+    s.arr[0] = 10;   //приваиваем arr[0] переменной s значение 10
+
+    StructWithArray s1 = { };   //объ€вл€ем переменную s1 типа StructWithArray и присваиваем ей значение 0
+    s1.arr[0] = 15;   //приваиваем arr[0] переменной s1 значение 15
+
+    StructWithArray* sPointer = &s;   //объ€вл€ем указатель sPointer типа StructWithArray и указываем адрес переменной s
+    sPointer->arr[0] = 20;   //с помощью адреса sPointer (в s) находим и присваеваем arr[0] значение 20
+
+    std::cout << s.arr[0] << std::endl;   //выводим на экран значение arr[0] (в s)
+    s.arr[0] = 25;   //присваиваем переменной значение 25
+    std::cout << s.arr[0] << std::endl;   //выводим на экран значение arr[0] (в s)
+    sPointer->arr[0] = 30;   //с помощью адреса sPointer (в s) находим и присваеваем arr[0] значение 30
+    std::cout << s.arr[0] << std::endl;   //выводим на экран значение arr[0] (в s)
+
+    sPointer = &s1;   //мен€ем адрес sPointer (s) на s1
+    sPointer->arr[0] = 35;   //с помощью адреса sPointer находим (в s1) и присваеваем arr[0] значение 35
+    std::cout << s.arr[0] << std::endl;   //выводим на экран значение (в s) arr[0] (30)
+    std::cout << s1.arr[0] << std::endl;   //выводим на экран значение (в s1) arr[0] (35)
+
+    StructWithArray structArray[2] = { };   //объ€вл€ем одномерный массив типа StructWithArray, содержащий два элемента и присваиваем им значени€ 0
+    structArray[0].arr[3] = 77;   //дл€ первого эелемента массива объ€чл€ем arr[3] и присваиваем значение 77
+    structArray[1].someNumber = &structArray[0].arr[3];   //дл€ второго элемента массива объ€вл€ем someNumber и указываем ему адрес arr[3] первого элемента
+
+    sPointer = &s;   //мен€ем адрес sPointer (s1) на s
+    int* pointer = &sPointer->arr[3];   //объ€вл€ем указатель pointer типа int и указываем ему адрес arr[3] через sPointer
+    s.arr[3] = 72;   //присваиваем аrr[3] (в s) значение 72
+    std::cout << *pointer;   //выводим на экран значение указател€ pointer
+
+    StructWithArray memory;   //объ€вл€ем переменную memory типа StructWithArray
+    memset(&memory, 0, sizeof(StructWithArray));   //указатель memory присваивает первым значени€м массива 0 в байтах
+    return 0;   //завершение выполнени€ функции 
+}
